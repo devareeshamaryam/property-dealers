@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Calendar, User, ArrowRight, Loader2 } from 'lucide-react';
 import { blogApi } from '@/lib/api';
 import { transformBlogsToPosts, BlogPost } from '@/lib/utils/blog-utils';
@@ -94,12 +93,11 @@ const BlogSection: React.FC<BlogSectionProps> = ({ initialPosts }) => {
                   <Link href={`/blog/${post.slug}`} className="group h-full block">
                     <article className="bg-white rounded-3xl overflow-hidden border border-gray-100 hover:border-black/5 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 h-full flex flex-col">
                       <div className="relative overflow-hidden h-64 w-full">
-                        <Image
+                        <img
                           src={post.image}
                           alt={post.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
-                          sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                          className="object-cover w-full h-full absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                          onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80'; }}
                         />
                         <div className="absolute top-4 left-4">
                           <span className="bg-white/90 backdrop-blur-md text-gray-900 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider shadow-xl">

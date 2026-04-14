@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { MapPin, ArrowRight, Loader2 } from 'lucide-react';
 import { cityApi, propertyApi } from '@/lib/api';
 import { toTitleCase } from '@/lib/utils';
@@ -119,12 +118,11 @@ const PopularLocations: React.FC<PopularLocationsProps> = ({ initialCities }) =>
                 href={`/properties/all/${city.slug}`}
                 className="group relative h-64 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
               >
-                <Image
+                <img
                   src={city.image}
                   alt={`${city.name} Real Estate`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                  className="object-cover w-full h-full absolute inset-0 transition-transform duration-700 group-hover:scale-110"
+                  onError={(e) => { (e.target as HTMLImageElement).src = FALLBACK_IMAGE; }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">

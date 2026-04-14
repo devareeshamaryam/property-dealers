@@ -1,6 +1,5 @@
 'use client'
 import { Heart, MapPin, Bed, Bath, Maximize, Loader2 } from 'lucide-react';
-import Image from 'next/image';
 import {
   Carousel,
   CarouselContent,
@@ -40,12 +39,11 @@ const PropertyCard = ({ property }: { property: FeaturedProperty }) => {
     <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 h-full flex flex-col">
       <Link href={`/properties/${property.slug || toSlug(property.title)}`}>
         <div className="relative h-64 overflow-hidden group cursor-pointer">
-          <Image
+          <img
             src={property.image}
             alt={property.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-            sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+            className="object-cover w-full h-full absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+            onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80'; }}
           />
         </div>
       </Link>
